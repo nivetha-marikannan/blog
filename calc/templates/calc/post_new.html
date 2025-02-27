@@ -1,0 +1,16 @@
+{% extends 'calc/base.html' %}
+
+{% block title %}
+    New Post
+{% endblock %}
+
+{% block content %}
+    <section>
+        <h1>New Post</h1>
+        <form class="form-with-validation" action="{% url 'calc:new-post' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+{% endblock %}

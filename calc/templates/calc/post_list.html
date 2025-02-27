@@ -1,0 +1,21 @@
+{% extends 'calc/base.html' %}
+
+{% block content %}
+    <div class="posts-container">
+        <div class="add-post-btn">
+            <a href="{% url 'calc:new-post' %}">
+                <button class="btn btn-primary">Add Post</button>
+            </a>
+        </div>
+
+        {% for post in posts %}
+            <div class="post-container">
+                <article>
+                    <h2><a href="{% url 'calc:post_detail' id=post.id %}" class="post-title">{{ post.title }}</a></h2>
+                    <p class="post-date">Published: {{ post.published_date }}</p>
+                    <p>{{ post.content|slice:":150" }}...</p>
+                </article>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

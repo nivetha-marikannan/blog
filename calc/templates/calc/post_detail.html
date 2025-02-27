@@ -1,0 +1,25 @@
+{% extends 'calc/base.html' %}
+
+{% block content %}
+    <div class="post-detail">
+        <h2>{{ post.title }}</h2>
+        <p class="date">Published: {{ post.published_date }}</p>
+        {% if post.image %}
+            <img src="{{ post.image.url }}" alt="Post Image" style="width: 300px; height: 200px; object-fit: cover; display: block; margin: 0 auto; border-radius: 10px;">
+        {% else %}
+            <p>No Image Available</p>
+        {% endif %}
+        <p>Author: {{ post.author }}</p>
+        <p>{{ post.text }}</p> 
+
+    </div>
+    <div class="top-right-buttons">
+        <a href="{% url 'calc:post_list' %}" class="btn btn-primary">Back to Post List</a>
+        <a href="{% url 'calc:post_edit' id=post.id %}" class="btn btn-secondary">Update</a>
+        <form method="POST" action="{% url 'calc:post_delete' id=post.id %}" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+
+{% endblock %}
